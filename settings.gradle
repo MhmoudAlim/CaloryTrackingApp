@@ -10,3 +10,4 @@ rootProject.name = "CaloryTrackingApp"
 include ':app'
 include ':core'
 include ':onboading'
+include ':onboading:onboading_presentation'
