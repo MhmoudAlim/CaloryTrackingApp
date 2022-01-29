@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/onboading" />
             <option value="$PROJECT_DIR$/onboading/onbaording_domain" />
             <option value="$PROJECT_DIR$/onboading/onboading_presentation" />
+            <option value="$PROJECT_DIR$/tracker" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
