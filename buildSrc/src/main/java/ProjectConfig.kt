@@ -1,5 +1,5 @@
 object ProjectConfig {
-    const val appId = "com.plcoding.calorytracker"
+    const val appId = "com.mahmoud.alim"
     const val compileSdk = 31
     const val minSdk = 21
     const val targetSdk = 31
