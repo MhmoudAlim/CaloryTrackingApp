@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/onboading" />
+            <option value="$PROJECT_DIR$/onboading/onbaording_domain" />
             <option value="$PROJECT_DIR$/onboading/onboading_presentation" />
           </set>
         </option>
