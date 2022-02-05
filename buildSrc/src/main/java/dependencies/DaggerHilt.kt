@@ -1,3 +1,5 @@
+package dependencies
+
 object DaggerHilt {
     const val version = "2.40"
     const val hiltAndroid = "com.google.dagger:hilt-android:$version"

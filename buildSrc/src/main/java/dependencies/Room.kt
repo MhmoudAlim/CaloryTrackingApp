@@ -1,3 +1,5 @@
+package dependencies
+
 object Room {
     private const val version = "2.4.0"
     const val roomRuntime = "androidx.room:room-runtime:$version"

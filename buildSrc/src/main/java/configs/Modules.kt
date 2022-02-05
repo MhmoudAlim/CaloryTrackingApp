@@ -1,3 +1,5 @@
+package configs
+
 object Modules {
     const val app = ":app"
 
