@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CaloryTrackingApp"
 include ':app'
+include ':core'
