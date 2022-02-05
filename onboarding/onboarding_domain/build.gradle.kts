@@ -3,5 +3,5 @@ apply {
 }
 
 dependencies {
-    "implementation"(project(configs.Modules.core))
+    "implementation"(project(Modules.core))
 }

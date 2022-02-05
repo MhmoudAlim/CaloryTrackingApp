@@ -3,9 +3,9 @@ apply {
 }
 
 dependencies {
-    "implementation"(project(configs.Modules.core))
-    "implementation"(project(configs.Modules.coreUi))
-    "implementation"(project(configs.Modules.trackerDomain))
+    "implementation"(project(Modules.core))
+    "implementation"(project(Modules.coreUi))
+    "implementation"(project(Modules.trackerDomain))
 
-    "implementation"(dependencies.Coil.coilCompose)
+    "implementation"(Coil.coilCompose)
 }

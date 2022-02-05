@@ -1,5 +1,3 @@
-package dependencies
-
 object Build {
     private const val androidBuildToolsVersion = "7.0.4"
     const val androidBuildTools = "com.android.tools.build:gradle:$androidBuildToolsVersion"

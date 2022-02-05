@@ -3,7 +3,7 @@ apply {
 }
 
 dependencies {
-    "implementation"(project(configs.Modules.core))
-    "implementation"(project(configs.Modules.coreUi))
-    "implementation"(project(configs.Modules.onboardingDomain))
+    "implementation"(project(Modules.core))
+    "implementation"(project(Modules.coreUi))
+    "implementation"(project(Modules.onboardingDomain))
 }

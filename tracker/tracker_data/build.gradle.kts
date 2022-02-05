@@ -3,15 +3,15 @@ apply {
 }
 
 dependencies {
-    "implementation"(project(configs.Modules.core))
-    "implementation"(project(configs.Modules.trackerDomain))
+    "implementation"(project(Modules.core))
+    "implementation"(project(Modules.trackerDomain))
 
-    "implementation"(dependencies.Retrofit.okHttp)
-    "implementation"(dependencies.Retrofit.retrofit)
-    "implementation"(dependencies.Retrofit.okHttpLoggingInterceptor)
-    "implementation"(dependencies.Retrofit.moshiConverter)
+    "implementation"(Retrofit.okHttp)
+    "implementation"(Retrofit.retrofit)
+    "implementation"(Retrofit.okHttpLoggingInterceptor)
+    "implementation"(Retrofit.moshiConverter)
 
-    "kapt"(dependencies.Room.roomCompiler)
-    "implementation"(dependencies.Room.roomKtx)
-    "implementation"(dependencies.Room.roomRuntime)
+    "kapt"(Room.roomCompiler)
+    "implementation"(Room.roomKtx)
+    "implementation"(Room.roomRuntime)
 }

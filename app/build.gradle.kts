@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    compileSdk = configs.ProjectConfig.compileSdk
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
-        applicationId = configs.ProjectConfig.appId
-        minSdk = configs.ProjectConfig.minSdk
-        targetSdk = configs.ProjectConfig.targetSdk
-        versionCode = configs.ProjectConfig.versionCode
-        versionName = configs.ProjectConfig.versionName
+        applicationId = ProjectConfig.appId
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
+        versionCode = ProjectConfig.versionCode
+        versionName = ProjectConfig.versionName
 
         testInstrumentationRunner = "com.plcoding.calorytracker.HiltTestRunner"
         vectorDrawables {
@@ -37,7 +37,7 @@ android {
         jvmTarget = "1.8"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = dependencies.Compose.composeCompilerVersion
+        kotlinCompilerExtensionVersion = Compose.composeCompilerVersion
     }
     packagingOptions {
         exclude("META-INF/AL2.0")
@@ -48,61 +48,61 @@ android {
 }
 
 dependencies {
-    implementation(dependencies.Compose.compiler)
-    implementation(dependencies.Compose.ui)
-    implementation(dependencies.Compose.uiToolingPreview)
-    implementation(dependencies.Compose.hiltNavigationCompose)
-    implementation(dependencies.Compose.material)
-    implementation(dependencies.Compose.runtime)
-    implementation(dependencies.Compose.navigation)
-    implementation(dependencies.Compose.viewModelCompose)
-    implementation(dependencies.Compose.activityCompose)
+    implementation(Compose.compiler)
+    implementation(Compose.ui)
+    implementation(Compose.uiToolingPreview)
+    implementation(Compose.hiltNavigationCompose)
+    implementation(Compose.material)
+    implementation(Compose.runtime)
+    implementation(Compose.navigation)
+    implementation(Compose.viewModelCompose)
+    implementation(Compose.activityCompose)
 
-    implementation(dependencies.DaggerHilt.hiltAndroid)
-    kapt(dependencies.DaggerHilt.hiltCompiler)
+    implementation(DaggerHilt.hiltAndroid)
+    kapt(DaggerHilt.hiltCompiler)
 
-    implementation(project(configs.Modules.core))
-    implementation(project(configs.Modules.coreUi))
-    implementation(project(configs.Modules.onboardingPresentation))
-    implementation(project(configs.Modules.onboardingDomain))
-    implementation(project(configs.Modules.trackerPresentation))
-    implementation(project(configs.Modules.trackerDomain))
-    implementation(project(configs.Modules.trackerData))
+    implementation(project(Modules.core))
+    implementation(project(Modules.coreUi))
+    implementation(project(Modules.onboardingPresentation))
+    implementation(project(Modules.onboardingDomain))
+    implementation(project(Modules.trackerPresentation))
+    implementation(project(Modules.trackerDomain))
+    implementation(project(Modules.trackerData))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
 
-    implementation(dependencies.Coil.coilCompose)
+    implementation(Coil.coilCompose)
 
-    implementation(dependencies.Google.material)
+    implementation(Google.material)
 
-    implementation(dependencies.Retrofit.okHttp)
-    implementation(dependencies.Retrofit.retrofit)
-    implementation(dependencies.Retrofit.okHttpLoggingInterceptor)
-    implementation(dependencies.Retrofit.moshiConverter)
+    implementation(Retrofit.okHttp)
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.okHttpLoggingInterceptor)
+    implementation(Retrofit.moshiConverter)
 
-    kapt(dependencies.Room.roomCompiler)
-    implementation(dependencies.Room.roomKtx)
-    implementation(dependencies.Room.roomRuntime)
+    kapt(Room.roomCompiler)
+    implementation(Room.roomKtx)
+    implementation(Room.roomRuntime)
 
-    testImplementation(dependencies.Testing.junit4)
-    testImplementation(dependencies.Testing.junitAndroidExt)
-    testImplementation(dependencies.Testing.truth)
-    testImplementation(dependencies.Testing.coroutines)
-    testImplementation(dependencies.Testing.turbine)
-    testImplementation(dependencies.Testing.composeUiTest)
-    testImplementation(dependencies.Testing.mockk)
-    testImplementation(dependencies.Testing.mockWebServer)
+    testImplementation(Testing.junit4)
+    testImplementation(Testing.junitAndroidExt)
+    testImplementation(Testing.truth)
+    testImplementation(Testing.coroutines)
+    testImplementation(Testing.turbine)
+    testImplementation(Testing.composeUiTest)
+    testImplementation(Testing.mockk)
+    testImplementation(Testing.mockWebServer)
 
-    androidTestImplementation(dependencies.Testing.junit4)
-    androidTestImplementation(dependencies.Testing.junitAndroidExt)
-    androidTestImplementation(dependencies.Testing.truth)
-    androidTestImplementation(dependencies.Testing.coroutines)
-    androidTestImplementation(dependencies.Testing.turbine)
-    androidTestImplementation(dependencies.Testing.composeUiTest)
-    androidTestImplementation(dependencies.Testing.mockkAndroid)
-    androidTestImplementation(dependencies.Testing.mockWebServer)
-    androidTestImplementation(dependencies.Testing.hiltTesting)
-    kaptAndroidTest(dependencies.DaggerHilt.hiltCompiler)
-    androidTestImplementation(dependencies.Testing.testRunner)
+    androidTestImplementation(Testing.junit4)
+    androidTestImplementation(Testing.junitAndroidExt)
+    androidTestImplementation(Testing.truth)
+    androidTestImplementation(Testing.coroutines)
+    androidTestImplementation(Testing.turbine)
+    androidTestImplementation(Testing.composeUiTest)
+    androidTestImplementation(Testing.mockkAndroid)
+    androidTestImplementation(Testing.mockWebServer)
+    androidTestImplementation(Testing.hiltTesting)
+    kaptAndroidTest(DaggerHilt.hiltCompiler)
+    androidTestImplementation(Testing.testRunner)
 }

@@ -1,5 +1,3 @@
-package dependencies
-
 object Compose {
     const val composeVersion = "1.1.0-rc01"
     const val composeCompilerVersion = "1.1.0-rc02"

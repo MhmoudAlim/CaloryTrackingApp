@@ -1,5 +1,3 @@
-package configs
-
 object ProjectConfig {
     const val appId = "com.mahmoudalim.calorytrackingapp"
     const val compileSdk = 31
