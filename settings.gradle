@@ -8,3 +8,13 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CaloryTrackingApp"
 include ':app'
+include ':core'
+include ':onboarding'
+include ':onboarding:onboarding_presentation'
+include ':onboarding:onboarding_data'
+include ':onboarding:onboarding_domain'
+include ':tracker'
+include ':tracker:tracker_domain'
+include ':tracker:tracker_presentation'
+include ':tracker:tracker_data'
+include ':core-ui'
