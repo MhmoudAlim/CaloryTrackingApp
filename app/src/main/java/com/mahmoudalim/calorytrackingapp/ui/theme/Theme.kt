@@ -52,6 +52,4 @@ fun CaloryTrackingAppTheme(
             content = content
         )
     }
-
-
 }
