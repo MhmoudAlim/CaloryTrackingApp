@@ -42,9 +42,6 @@ class MainActivity : ComponentActivity() {
                     composable(Route.ACTIVITY) {
 
                     }
-                    composable(Route.WELCOME) {
-
-                    }
                     composable(Route.GOAL) {
 
                     }
