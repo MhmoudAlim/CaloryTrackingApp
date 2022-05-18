@@ -16,11 +16,12 @@ sealed class GoalType(val name: String) {
     }
 
     companion object {
-        fun fromString(name: Type): GoalType {
+        fun fromString(name: String): GoalType {
             return when (name) {
-                Type.LOSE -> LoseWeight
-                Type.KEEP -> KeepWeight
-                Type.GAIN -> GainWeight
+                Type.LOSE.value -> LoseWeight
+                Type.KEEP.value -> KeepWeight
+                Type.GAIN.value -> GainWeight
+                else -> KeepWeight
             }
         }
     }

@@ -14,10 +14,11 @@ sealed class Gender(val name: String) {
     }
 
     companion object {
-        fun fromString(name: Type): Gender {
+        fun fromString(name: String): Gender {
             return when (name) {
-                Type.MALE -> Male
-                Type.FEMALE -> Female
+                Type.MALE.value -> Male
+                Type.FEMALE.value -> Female
+                else -> Male
             }
         }
     }

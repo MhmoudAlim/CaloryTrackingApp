@@ -22,4 +22,18 @@ interface Preferences {
     fun saveFatRatio(ratio: Float)
 
     fun getUserInfo(): UserInfo
+
+    companion object {
+
+        const val PREF_NAME = "app_shared_pref"
+        const val KEY_GENDER = "gender"
+        const val KEY_AGE = "age"
+        const val KEY_WEIGHT = "weight"
+        const val KEY_HEIGHT = "height"
+        const val KEY_ACTIVITY_LEVEL = "level"
+        const val KEY_GOAL_TYPE = "goal"
+        const val KEY_CARB_RATIO = "carb"
+        const val KEY_PROTEIN_RATIO = "protein"
+        const val KEY_FAT_RATIO = "fat"
+    }
 }
