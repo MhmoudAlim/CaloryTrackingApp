@@ -16,11 +16,12 @@ sealed class ActivityLevel(val name: String) {
     }
 
     companion object {
-        fun fromString(name: Type): ActivityLevel {
+        fun fromString(name: String): ActivityLevel {
             return when (name) {
-                Type.LOW -> Low
-                Type.MEDIUM -> Medium
-                Type.HIGH -> High
+                Type.LOW.value -> Low
+                Type.MEDIUM.value -> Medium
+                Type.HIGH.value -> High
+                else -> Medium
             }
         }
     }
