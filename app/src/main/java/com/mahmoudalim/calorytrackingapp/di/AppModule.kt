@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import com.mahmoudalim.core.data.preferences.DefaultPreferences
 import com.mahmoudalim.core.domian.preferences.Preferences
 import com.mahmoudalim.core.domian.preferences.Preferences.Companion.PREF_NAME
+import com.mahmoudalim.core.domian.usecase.FilterOutDigits
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,4 +31,7 @@ object AppModule {
     fun providePreferences(sharedPreferences: SharedPreferences): Preferences =
         DefaultPreferences(sharedPref = sharedPreferences)
 
+    @Provides
+    @Singleton
+    fun provideFilterOutDigitsUseCase() = FilterOutDigits()
 }
