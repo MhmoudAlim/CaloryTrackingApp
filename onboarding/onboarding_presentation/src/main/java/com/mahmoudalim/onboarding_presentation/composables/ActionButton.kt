@@ -1,4 +1,4 @@
-package com.mahmoudalim.onboarding_presentation.welcome.composables
+package com.mahmoudalim.onboarding_presentation.composables
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -6,8 +6,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.mahmoudalim.core.R
 import com.mahmoudalim.core_ui.LocalSpacing
 
 /**
@@ -16,9 +18,9 @@ import com.mahmoudalim.core_ui.LocalSpacing
 
 @Composable
 fun ActionButton(
-    text: String,
     modifier: Modifier = Modifier,
-    iseEnabled: Boolean,
+    text: String = stringResource(id = R.string.next),
+    iseEnabled: Boolean = true,
     textStyle: TextStyle = MaterialTheme.typography.button,
     buttonColors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
     onClick: () -> Unit,
@@ -36,8 +38,5 @@ fun ActionButton(
             color = MaterialTheme.colors.onPrimary,
             modifier = Modifier.padding(LocalSpacing.current.spaceSmall)
         )
-
-
     }
-
 }
