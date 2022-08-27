@@ -1,4 +1,4 @@
-package com.mahmoudalim.onboarding_presentation.gender
+package com.mahmoudalim.onboarding_presentation.activitylevel
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mahmoudalim.core.domian.model.ActivityLevel
 import com.mahmoudalim.core.domian.model.Gender
 import com.mahmoudalim.core.util.UiEvent
 import com.mahmoudalim.core_ui.LocalSpacing
@@ -22,13 +23,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
 /**
- * @author Mahmoud Alim on 26/08/2022.
+ * @author Mahmoud Alim on 27/08/2022.
  */
 
 @Composable
-fun GenderScreen(
+fun ActivityLevelScreen(
     onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: GenderViewModel = hiltViewModel()
+    viewModel: ActivityLevelViewModel = hiltViewModel()
 ) {
     ObserveUIEvents(
         uiEvent = viewModel.uiEvent,
@@ -44,7 +45,7 @@ fun GenderScreen(
         ) {
 
             Text(
-                text = stringResource(id = R.string.whats_your_gender),
+                text = stringResource(id = R.string.whats_your_activity_level),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h1,
                 color = MaterialTheme.colors.onSurface
@@ -52,7 +53,7 @@ fun GenderScreen(
 
             Spacer(modifier = Modifier.height(spacing.spaceLarge))
 
-            MaleFemaleButtonsRow(viewModel)
+            ActivityLevelButtonsRow(viewModel)
         }
 
         ActionButton(
@@ -65,25 +66,35 @@ fun GenderScreen(
 }
 
 @Composable
-private fun MaleFemaleButtonsRow(viewModel: GenderViewModel) {
+private fun ActivityLevelButtonsRow(viewModel: ActivityLevelViewModel) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(LocalSpacing.current.spaceMedium)
     ) {
         SelectableButton(
-            text = stringResource(id = R.string.male),
-            onClick = { viewModel.onGenderChanged(Gender.Male) },
+            text = stringResource(id = R.string.low),
+            onClick = { viewModel.onActivityLevelChanged(ActivityLevel.Low) },
             color = MaterialTheme.colors.primaryVariant,
-            isSelected = viewModel.selectedGender is Gender.Male,
+            isSelected = viewModel.selectedActivityLevel is ActivityLevel.Low,
             textStyle = MaterialTheme.typography.button.copy(
                 fontWeight = FontWeight.Normal
             )
         )
 
         SelectableButton(
-            text = stringResource(id = R.string.female),
-            onClick = { viewModel.onGenderChanged(Gender.Female) },
+            text = stringResource(id = R.string.medium),
+            onClick = { viewModel.onActivityLevelChanged(ActivityLevel.Medium) },
             color = MaterialTheme.colors.primaryVariant,
-            isSelected = viewModel.selectedGender is Gender.Female,
+            isSelected = viewModel.selectedActivityLevel is ActivityLevel.Medium,
+            textStyle = MaterialTheme.typography.button.copy(
+                fontWeight = FontWeight.Normal
+            )
+        )
+
+        SelectableButton(
+            text = stringResource(id = R.string.high),
+            onClick = { viewModel.onActivityLevelChanged(ActivityLevel.High) },
+            color = MaterialTheme.colors.primaryVariant,
+            isSelected = viewModel.selectedActivityLevel is ActivityLevel.High,
             textStyle = MaterialTheme.typography.button.copy(
                 fontWeight = FontWeight.Normal
             )
