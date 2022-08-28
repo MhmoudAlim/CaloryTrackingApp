@@ -45,7 +45,7 @@ fun GoalScreen(
         ) {
 
             Text(
-                text = stringResource(id = R.string.your_goal),
+                text = stringResource(id = R.string.lose_keep_or_gain_weight),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h1,
                 color = MaterialTheme.colors.onSurface
