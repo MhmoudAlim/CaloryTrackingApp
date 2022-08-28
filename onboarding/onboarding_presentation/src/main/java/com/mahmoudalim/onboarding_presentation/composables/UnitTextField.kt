@@ -55,8 +55,7 @@ fun UnitTextField(
                 .width(IntrinsicSize.Min)
                 .alignByBaseline(),
             keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-
-            )
+        )
 
         Text(
             text = unit,
