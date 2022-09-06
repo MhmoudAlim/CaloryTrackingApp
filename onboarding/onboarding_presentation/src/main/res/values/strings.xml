@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="error_age_cant_be_more_than">Age can\'t be more than 111 years old</string>
 </resources>

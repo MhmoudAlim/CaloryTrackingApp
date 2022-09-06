@@ -57,6 +57,6 @@
     <string name="lose_keep_or_gain_weight">Do you want to lose, keep or gain weight?</string>
     <string name="whats_your_activity_level">What\'s your activity level?</string>
     <string name="error_not_100_percent">The values must add up to 100%</string>
-    <string name="your_goal">Your goal:</string>
+    <string name="your_goal">Your goalis to:</string>
     <string name="delete">Delete</string>
 </resources>
