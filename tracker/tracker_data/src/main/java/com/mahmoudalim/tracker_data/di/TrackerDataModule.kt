@@ -6,6 +6,8 @@ import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mahmoudalim.tracker_data.local.db.TrackerDatabase
 import com.mahmoudalim.tracker_data.remote.api.OpenFoodApi
+import com.mahmoudalim.tracker_data.repository.TrackerRepoImpl
+import com.mahmoudalim.tracker_domain.repository.TrackerRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,7 +48,6 @@ object TrackerDataModule {
             .create()
     }
 
-
     @Provides
     @Singleton
     fun provideTrackerDatabase(app: Application): TrackerDatabase {
@@ -55,6 +56,18 @@ object TrackerDataModule {
             TrackerDatabase::class.java,
             TrackerDatabase.NAME
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrackerRepo(
+        api: OpenFoodApi,
+        database: TrackerDatabase
+    ): TrackerRepo {
+        return TrackerRepoImpl(
+            api = api,
+            dao = database.dao
+        )
     }
 }
 
