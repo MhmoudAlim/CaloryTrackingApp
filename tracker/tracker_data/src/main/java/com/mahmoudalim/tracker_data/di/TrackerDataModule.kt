@@ -1,12 +1,15 @@
 package com.mahmoudalim.tracker_data.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mahmoudalim.tracker_data.local.db.TrackerDatabase
 import com.mahmoudalim.tracker_data.remote.api.OpenFoodApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,10 +27,11 @@ object TrackerDataModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() = OkHttpClient.Builder()
+    fun provideOkHttpClient(@ApplicationContext appContext: Context) = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
             setLevel(HttpLoggingInterceptor.Level.BODY)
         })
+        .addInterceptor(ChuckerInterceptor(appContext))
         .build()
 
     @Provides
