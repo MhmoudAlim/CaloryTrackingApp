@@ -41,7 +41,7 @@ class TrackerRepoImpl(
         dao.deleteTrackedFood(food.toTrackedFoodEntity())
     }
 
-    override suspend fun getFoodForDate(date: LocalDate): Flow<List<TrackedFood>> {
+    override fun getFoodForDate(date: LocalDate): Flow<List<TrackedFood>> {
         return dao.getFoodFromDate(
             dayOfMonth = date.dayOfMonth,
             month = date.monthValue,
