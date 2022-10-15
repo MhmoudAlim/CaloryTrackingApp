@@ -14,4 +14,5 @@ data class UserInfo(
     val carbRatio: Float,
     val proteinRatio: Float,
     val fatRatio: Float,
+    val bmrFormula: BmrFormula = BmrFormula.HARRIS_BENEDICT_BY_ROZA_1984
 )
