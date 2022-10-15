@@ -15,5 +15,5 @@ data class TrackedFood(
     val mealType: MealType,
     val amount: Int,
     val date: LocalDate,
-    val id: Int?
+    val id: Int? = null
 )
