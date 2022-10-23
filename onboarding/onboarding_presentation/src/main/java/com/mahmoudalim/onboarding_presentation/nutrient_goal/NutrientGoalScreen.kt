@@ -103,6 +103,7 @@ private fun ObserveUIEvents(
                     )
                 }
                 UiEvent.NavigateUp -> Unit
+                UiEvent.Idle -> Unit
             }
         }
     }
