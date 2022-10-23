@@ -84,7 +84,7 @@ class DefaultPreferences(
         val goalType = sharedPref.getString(KEY_GOAL_TYPE, null) ?: GoalType.Type.KEEP.value
         return UserInfo(
             gender = Gender.fromString(gender),
-            age = sharedPref.getInt(KEY_GENDER, 1),
+            age = sharedPref.getInt(KEY_AGE, 1),
             weight = sharedPref.getFloat(KEY_WEIGHT, 1f),
             height = sharedPref.getInt(KEY_HEIGHT, 1),
             activityLevel = ActivityLevel.fromString(activityLevel),
