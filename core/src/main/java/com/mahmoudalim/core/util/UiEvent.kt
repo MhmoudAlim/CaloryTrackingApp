@@ -5,7 +5,15 @@ package com.mahmoudalim.core.util
  */
 
 sealed class UiEvent {
+    //TODO: will most probably cause a bug(git rid off Idle)
+    object Idle : UiEvent()
     data class Navigate(val route: String) : UiEvent()
     object NavigateUp : UiEvent()
     class ShowSnackBar(val message: UiText) : UiEvent()
+
+    companion object {
+        override fun toString(): String {
+            return "UiEvent"
+        }
+    }
 }
