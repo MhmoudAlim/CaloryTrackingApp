@@ -22,7 +22,7 @@ fun ActionButton(
     text: String = stringResource(id = R.string.next),
     iseEnabled: Boolean = true,
     textStyle: TextStyle = MaterialTheme.typography.button,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
+    buttonColors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondaryVariant),
     onClick: () -> Unit,
 ) {
     Button(
