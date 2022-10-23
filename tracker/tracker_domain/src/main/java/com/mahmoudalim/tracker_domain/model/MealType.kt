@@ -20,9 +20,9 @@ sealed class MealType(val name: String) {
             }
         }
 
-        const val BREAKFAST = "breakfast"
-        const val LUNCH = "lunch"
-        const val DINNER = "dinner"
-        const val SNACK = "snack"
+        private const val BREAKFAST = "breakfast"
+        private const val LUNCH = "lunch"
+        private const val DINNER = "dinner"
+        private const val SNACK = "snack"
     }
 }
