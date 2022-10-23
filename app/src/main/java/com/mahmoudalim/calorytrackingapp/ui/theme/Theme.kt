@@ -7,12 +7,21 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import com.mahmoudalim.core_ui.BrightGreen
+import com.mahmoudalim.core_ui.DarkGray
+import com.mahmoudalim.core_ui.DarkGreen
 import com.mahmoudalim.core_ui.Dimensions
+import com.mahmoudalim.core_ui.LightGray
 import com.mahmoudalim.core_ui.LocalSpacing
+import com.mahmoudalim.core_ui.MediumGray
+import com.mahmoudalim.core_ui.Orange
+import com.mahmoudalim.core_ui.Purple500
+import com.mahmoudalim.core_ui.Purple700
+import com.mahmoudalim.core_ui.TextWhite
 
 private val DarkColorPalette = darkColors(
-    primary = BrightGreen,
-    primaryVariant = DarkGreen,
+    primary = Purple700,
+    primaryVariant = Purple500,
     secondary = Orange,
     background = MediumGray,
     onBackground = TextWhite,
@@ -23,8 +32,8 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = BrightGreen,
-    primaryVariant = DarkGreen,
+    primary = Purple700,
+    primaryVariant = Purple500,
     secondary = Orange,
     background = Color.White,
     onBackground = DarkGray,
