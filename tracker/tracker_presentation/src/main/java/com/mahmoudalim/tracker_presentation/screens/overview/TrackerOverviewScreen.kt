@@ -1,6 +1,9 @@
 package com.mahmoudalim.tracker_presentation.screens.overview
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -9,6 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mahmoudalim.core.util.UiEvent
 import com.mahmoudalim.core_ui.LocalSpacing
+import com.mahmoudalim.tracker_presentation.screens.overview.composables.DaySelector
 import com.mahmoudalim.tracker_presentation.screens.overview.composables.NutrientsHeader
 
 /**
@@ -21,7 +25,7 @@ fun TrackerOverViewViewScreen(
     viewModel: TrackerOverViewViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
-        //TODO: revest state type (savedStateHandle)
+    //TODO: revest state type (savedStateHandle)
     val state = viewModel.state
     val context = LocalContext.current
 
@@ -31,9 +35,17 @@ fun TrackerOverViewViewScreen(
             .padding(bottom = spacing.spaceMedium)
     ) {
         item {
-            NutrientsHeader(state = state.value)
+            NutrientsHeader(state = state)
+            Spacer(modifier = Modifier.height(spacing.spaceMedium))
+            DaySelector(
+                day = state.date,
+                onPreviousDayClick = { viewModel.onEvent(TrackerOverViewEvent.OnPreviousDayClick) },
+                onNextDayClick = { viewModel.onEvent(TrackerOverViewEvent.OnNextDayClick) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = spacing.spaceMedium)
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceMedium))
         }
-
     }
-
 }
