@@ -14,6 +14,7 @@ import com.mahmoudalim.core.domian.preferences.Preferences.Companion.KEY_GENDER
 import com.mahmoudalim.core.domian.preferences.Preferences.Companion.KEY_GOAL_TYPE
 import com.mahmoudalim.core.domian.preferences.Preferences.Companion.KEY_HEIGHT
 import com.mahmoudalim.core.domian.preferences.Preferences.Companion.KEY_PROTEIN_RATIO
+import com.mahmoudalim.core.domian.preferences.Preferences.Companion.KEY_SHOW_ONBOARDING
 import com.mahmoudalim.core.domian.preferences.Preferences.Companion.KEY_WEIGHT
 
 /**
@@ -78,7 +79,8 @@ class DefaultPreferences(
 
     override fun getUserInfo(): UserInfo {
         val gender = sharedPref.getString(KEY_GENDER, null) ?: Gender.Type.MALE.value
-        val activityLevel = sharedPref.getString(KEY_ACTIVITY_LEVEL, null) ?: ActivityLevel.Type.MEDIUM.value
+        val activityLevel =
+            sharedPref.getString(KEY_ACTIVITY_LEVEL, null) ?: ActivityLevel.Type.MEDIUM.value
         val goalType = sharedPref.getString(KEY_GOAL_TYPE, null) ?: GoalType.Type.KEEP.value
         return UserInfo(
             gender = Gender.fromString(gender),
@@ -91,5 +93,15 @@ class DefaultPreferences(
             proteinRatio = sharedPref.getFloat(KEY_PROTEIN_RATIO, 1f),
             fatRatio = sharedPref.getFloat(KEY_FAT_RATIO, 1f),
         )
+    }
+
+    override fun saveShouldShowOnboarding(shouldShowOnboarding: Boolean) {
+        sharedPref.edit()
+            .putBoolean(KEY_SHOW_ONBOARDING, shouldShowOnboarding)
+            .apply()
+    }
+
+    override fun loadShouldShowOnboarding(): Boolean {
+        return sharedPref.getBoolean(KEY_SHOW_ONBOARDING, true)
     }
 }
