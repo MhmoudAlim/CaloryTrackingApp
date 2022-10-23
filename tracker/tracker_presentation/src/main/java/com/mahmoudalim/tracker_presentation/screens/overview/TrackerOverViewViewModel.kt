@@ -34,6 +34,7 @@ class TrackerOverViewViewModel @Inject constructor(
 
     private var getFoodForDateJab: Job? = null
 
+    //TODO: revest adding savedStateHandle
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 

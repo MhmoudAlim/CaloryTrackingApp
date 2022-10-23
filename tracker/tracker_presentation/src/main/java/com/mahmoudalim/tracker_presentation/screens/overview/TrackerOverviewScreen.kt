@@ -25,7 +25,6 @@ fun TrackerOverViewViewScreen(
     viewModel: TrackerOverViewViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
-    //TODO: revest state type (savedStateHandle)
     val state = viewModel.state
     val context = LocalContext.current
 
