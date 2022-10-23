@@ -1,5 +1,8 @@
 package com.mahmoudalim.tracker_presentation.screens.overview
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,9 +13,10 @@ import com.mahmoudalim.tracker_domain.usecase.TrackerUseCases
 import com.mahmoudalim.tracker_presentation.screens.overview.model.TrackerOverViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,13 +34,10 @@ class TrackerOverViewViewModel @Inject constructor(
 
     private var getFoodForDateJab: Job? = null
 
-    var uiEvent: StateFlow<UiEvent> =
-        savedStateHandle.getStateFlow(UiEvent.toString(), UiEvent.Idle)
-        private set
+    private val _uiEvent = Channel<UiEvent>()
+    val uiEvent = _uiEvent.receiveAsFlow()
 
-
-    var state: StateFlow<Tracker> =
-        savedStateHandle.getStateFlow(TrackerOverViewState.toString(), Tracker())
+    var state by mutableStateOf(TrackerOverViewState())
         private set
 
     init {
@@ -47,12 +48,14 @@ class TrackerOverViewViewModel @Inject constructor(
         when (event) {
             is TrackerOverViewEvent.OnAddNewFoodClicked -> {
                 viewModelScope.launch {
-                    savedStateHandle[UiEvent.toString()] = UiEvent.Navigate(
-                        route = Route.SEARCH
-                                + "/${event.meal.mealType.name}"
-                                + "/${state.value.date.dayOfMonth}"
-                                + "/${state.value.date.monthValue}"
-                                + "/${state.value.date.year}"
+                    _uiEvent.send(
+                        UiEvent.Navigate(
+                            route = Route.SEARCH
+                                    + "/${event.meal.mealType.name}"
+                                    + "/${state.date.dayOfMonth}"
+                                    + "/${state.date.monthValue}"
+                                    + "/${state.date.year}"
+                        )
                     )
                 }
             }
@@ -64,33 +67,30 @@ class TrackerOverViewViewModel @Inject constructor(
             }
             TrackerOverViewEvent.OnNextDayClick -> {
                 viewModelScope.launch {
-                    savedStateHandle[TrackerOverViewState.toString()] =
-                        state.value.copy(
-                            date = state.value.date.plusDays(1)
-                        )
+                    state = state.copy(
+                        date = state.date.plusDays(1)
+                    )
                     refreshFoods()
                 }
             }
             TrackerOverViewEvent.OnPreviousDayClick -> {
                 viewModelScope.launch {
-                    savedStateHandle[TrackerOverViewState.toString()] =
-                        state.value.copy(
-                            date = state.value.date.minusDays(1)
-                        )
+                    state = state.copy(
+                        date = state.date.minusDays(1)
+                    )
                     refreshFoods()
                 }
 
             }
             is TrackerOverViewEvent.OnToggleMealClick -> {
                 viewModelScope.launch {
-                    savedStateHandle[TrackerOverViewState.toString()] =
-                        state.value.copy(
-                            meals = state.value.meals.map {
-                                if (it.name == event.meal.name) {
-                                    it.copy(isExpanded = !it.isExpanded)
-                                } else it
-                            }
-                        )
+                    state = state.copy(
+                        meals = state.meals.map {
+                            if (it.name == event.meal.name) {
+                                it.copy(isExpanded = !it.isExpanded)
+                            } else it
+                        }
+                    )
                     refreshFoods()
                 }
             }
@@ -99,38 +99,37 @@ class TrackerOverViewViewModel @Inject constructor(
 
     private fun refreshFoods() {
         cancelCurrentJob()
-        trackerUseCases.getFoodForDateUseCase(state.value.date)
+        trackerUseCases.getFoodForDateUseCase(state.date)
             .onEach { trackedFoodList ->
                 val nutrientsResult = trackerUseCases.calculateMealNutrientsUseCase(trackedFoodList)
-                savedStateHandle[TrackerOverViewState.toString()] =
-                    state.value.copy(
-                        totalCalories = nutrientsResult.totalCalories,
-                        totalCarbs = nutrientsResult.totalCarbs,
-                        totalProtein = nutrientsResult.totalProtein,
-                        totalFat = nutrientsResult.totalFat,
-                        carbsGoal = nutrientsResult.carbsGoal,
-                        caloriesGoal = nutrientsResult.caloriesGoal,
-                        fatGoal = nutrientsResult.fatGoal,
-                        proteinGoal = nutrientsResult.proteinGoal,
-                        date = state.value.date,
-                        trackedFoods = trackedFoodList,
-                        meals = state.value.meals.map { meal ->
-                            val nutrientsForMeal =
-                                nutrientsResult.mealNutrients[meal.mealType]
-                                    ?: return@map meal.copy(
-                                        carbs = 0,
-                                        protein = 0,
-                                        calories = 0,
-                                        fat = 0
-                                    )
-                            meal.copy(
-                                carbs = nutrientsForMeal.carbs,
-                                fat = nutrientsForMeal.fat,
-                                calories = nutrientsForMeal.calories,
-                                protein = nutrientsForMeal.protein,
-                            )
-                        }
-                    )
+                state = state.copy(
+                    totalCalories = nutrientsResult.totalCalories,
+                    totalCarbs = nutrientsResult.totalCarbs,
+                    totalProtein = nutrientsResult.totalProtein,
+                    totalFat = nutrientsResult.totalFat,
+                    carbsGoal = nutrientsResult.carbsGoal,
+                    caloriesGoal = nutrientsResult.caloriesGoal,
+                    fatGoal = nutrientsResult.fatGoal,
+                    proteinGoal = nutrientsResult.proteinGoal,
+                    date = state.date,
+                    trackedFoods = trackedFoodList,
+                    meals = state.meals.map { meal ->
+                        val nutrientsForMeal =
+                            nutrientsResult.mealNutrients[meal.mealType]
+                                ?: return@map meal.copy(
+                                    carbs = 0,
+                                    protein = 0,
+                                    calories = 0,
+                                    fat = 0
+                                )
+                        meal.copy(
+                            carbs = nutrientsForMeal.carbs,
+                            fat = nutrientsForMeal.fat,
+                            calories = nutrientsForMeal.calories,
+                            protein = nutrientsForMeal.protein,
+                        )
+                    }
+                )
             }.launchIn(viewModelScope)
             .also { getFoodForDateJab = it }
     }
