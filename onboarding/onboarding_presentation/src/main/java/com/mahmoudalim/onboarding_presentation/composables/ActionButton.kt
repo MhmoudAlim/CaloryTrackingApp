@@ -11,6 +11,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.core.R
 import com.mahmoudalim.core_ui.LocalSpacing
+import com.mahmoudalim.core_ui.bounceClick
 
 /**
  * Created by Mahmoud Alim on 05/02/2022.
@@ -27,10 +28,10 @@ fun ActionButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.bounceClick(),
         enabled = iseEnabled,
         shape = RoundedCornerShape(60.dp),
-        colors = buttonColors
+        colors = buttonColors,
     ) {
         Text(
             text = text,
