@@ -24,7 +24,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.UnitDisplay
-import com.mahmoudalim.tracker_presentation.components.UnitDisplayData
+import com.mahmoudalim.tracker_presentation.screens.overview.model.UnitDisplayData
+
 
 /**
  * @author Mahmoud Alim on 23/10/2022.

@@ -11,6 +11,7 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.mahmoudalim.core_ui.LocalSpacing
+import com.mahmoudalim.tracker_presentation.screens.overview.model.UnitDisplayData
 
 /**
  * @author Mahmoud Alim on 17/10/2022.
@@ -42,12 +43,3 @@ fun UnitDisplay(
         )
     }
 }
-
-data class UnitDisplayData(
-    val unit: String,
-    val amount: Int,
-    val amountTextSize: TextUnit = 20.sp,
-    val amountColor: Color,
-    val unitTextSize: TextUnit = 14.sp,
-    val unitColor: Color,
-)

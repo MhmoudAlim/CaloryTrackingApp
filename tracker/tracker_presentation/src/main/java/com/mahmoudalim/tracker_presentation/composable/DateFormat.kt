@@ -1,4 +1,4 @@
-package com.mahmoudalim.tracker_presentation.screens.overview.composables
+package com.mahmoudalim.tracker_presentation.composable
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

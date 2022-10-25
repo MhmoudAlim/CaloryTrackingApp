@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.mahmoudalim.tracker_presentation.R
+import com.mahmoudalim.tracker_presentation.composable.formatDateText
 import java.time.LocalDate
 
 /**
