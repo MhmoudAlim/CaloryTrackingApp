@@ -25,12 +25,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.mahmoudalim.core_ui.LocalSpacing
-import com.mahmoudalim.core_ui.bounceClick
+import com.mahmoudalim.core_ui.pressClickEffect
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.NutrientItemInfo
 import com.mahmoudalim.tracker_presentation.components.UnitDisplay
 import com.mahmoudalim.tracker_presentation.screens.overview.model.Meal
-import com.mahmoudalim.tracker_presentation.screens.overview.model.UnitDisplayData
 
 /**
  * @author Mahmoud Alim on 24/10/2022.
@@ -49,7 +48,7 @@ fun ExpandableMeal(
     ) {
         Row(modifier = Modifier
             .fillMaxWidth()
-            .bounceClick()
+            .pressClickEffect()
             .clickable { onToggleClick() }
             .padding(spacing.spaceMedium),
             verticalAlignment = Alignment.CenterVertically
@@ -86,13 +85,11 @@ fun ExpandableMeal(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     UnitDisplay(
-                        data = UnitDisplayData(
-                            unit = stringResource(id = R.string.kcal),
-                            amount = meal.calories,
-                            amountTextSize = 28.sp,
-                            unitColor = MaterialTheme.colors.onPrimary,
-                            amountColor = MaterialTheme.colors.onPrimary,
-                        )
+                        unit = stringResource(id = R.string.kcal),
+                        amount = meal.calories,
+                        amountTextSize = 28.sp,
+                        unitColor = MaterialTheme.colors.onPrimary,
+                        amountColor = MaterialTheme.colors.onPrimary,
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -100,33 +97,28 @@ fun ExpandableMeal(
                     ) {
                         NutrientItemInfo(
                             name = stringResource(id = R.string.carbs),
-                            data = UnitDisplayData(
-                                unit = stringResource(id = R.string.grams),
-                                amount = meal.carbs,
-                                amountTextSize = 28.sp,
-                                unitColor = MaterialTheme.colors.onPrimary,
-                                amountColor = MaterialTheme.colors.onPrimary,
-                            )
+                            unit = stringResource(id = R.string.grams),
+                            amount = meal.carbs,
+                            amountTextSize = 28.sp,
+                            unitColor = MaterialTheme.colors.onPrimary,
+                            amountColor = MaterialTheme.colors.onPrimary,
                         )
                         NutrientItemInfo(
                             name = stringResource(id = R.string.protein),
-                            data = UnitDisplayData(
-                                unit = stringResource(id = R.string.grams),
-                                amount = meal.protein,
-                                amountTextSize = 28.sp,
-                                unitColor = MaterialTheme.colors.onPrimary,
-                                amountColor = MaterialTheme.colors.onPrimary,
+                            unit = stringResource(id = R.string.grams),
+                            amount = meal.protein,
+                            amountTextSize = 28.sp,
+                            unitColor = MaterialTheme.colors.onPrimary,
+                            amountColor = MaterialTheme.colors.onPrimary,
+
                             )
-                        )
                         NutrientItemInfo(
                             name = stringResource(id = R.string.fat),
-                            data = UnitDisplayData(
-                                unit = stringResource(id = R.string.grams),
-                                amount = meal.fat,
-                                amountTextSize = 28.sp,
-                                unitColor = MaterialTheme.colors.onPrimary,
-                                amountColor = MaterialTheme.colors.onPrimary,
-                            )
+                            unit = stringResource(id = R.string.grams),
+                            amount = meal.fat,
+                            amountTextSize = 28.sp,
+                            unitColor = MaterialTheme.colors.onPrimary,
+                            amountColor = MaterialTheme.colors.onPrimary,
                         )
                     }
                 }

@@ -11,7 +11,6 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.mahmoudalim.core_ui.LocalSpacing
-import com.mahmoudalim.tracker_presentation.screens.overview.model.UnitDisplayData
 
 /**
  * @author Mahmoud Alim on 17/10/2022.
@@ -19,25 +18,30 @@ import com.mahmoudalim.tracker_presentation.screens.overview.model.UnitDisplayDa
 
 @Composable
 fun UnitDisplay(
-    data: UnitDisplayData,
-    modifier: Modifier = Modifier
+    amount: Int,
+    unit: String,
+    modifier: Modifier = Modifier,
+    amountTextSize: TextUnit = 20.sp,
+    amountColor: Color = MaterialTheme.colors.onBackground,
+    unitTextSize: TextUnit = 14.sp,
+    unitColor: Color = MaterialTheme.colors.onBackground
 ) {
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(LocalSpacing.current.spaceExtraSmall)
     ) {
         Text(
-            text = data.amount.toString(),
-            color = data.amountColor,
-            fontSize = data.amountTextSize,
+            text = amount.toString(),
+            color = amountColor,
+            fontSize = amountTextSize,
             style = MaterialTheme.typography.h1,
             modifier = Modifier.alignBy(LastBaseline)
         )
 
         Text(
-            text = data.unit,
-            color = data.unitColor,
-            fontSize = data.unitTextSize,
+            text = unit,
+            color = unitColor,
+            fontSize = unitTextSize,
             style = MaterialTheme.typography.h3,
             modifier = Modifier.alignBy(LastBaseline)
         )

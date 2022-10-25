@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.UnitDisplay
-import com.mahmoudalim.tracker_presentation.screens.overview.model.UnitDisplayData
 
 
 /**
@@ -86,12 +85,10 @@ private fun BarTextValues(
         val textColor =
             if (nutrientValue > goal) goalExceededColor else MaterialTheme.colors.onPrimary
         UnitDisplay(
-            data = UnitDisplayData(
                 unit = nutrientUnit,
                 amountColor = textColor,
                 amount = nutrientValue,
                 unitColor = backgroundColor,
-            )
         )
         Text(
             text = name,

@@ -27,7 +27,6 @@ import com.mahmoudalim.core_ui.ProteinColor
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.UnitDisplay
 import com.mahmoudalim.tracker_presentation.screens.overview.model.TrackerOverViewState
-import com.mahmoudalim.tracker_presentation.screens.overview.model.UnitDisplayData
 
 /**
  * @author Mahmoud Alim on 23/10/2022.
@@ -101,13 +100,12 @@ private fun CaloriesCounterView(totalCalories: Int) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         UnitDisplay(
-            data = UnitDisplayData(
                 amount = animatedCaloriesCount.value,
                 unit = stringResource(id = R.string.kcal),
                 amountColor = MaterialTheme.colors.onPrimary,
                 amountTextSize = 32.sp,
                 unitColor = MaterialTheme.colors.onPrimary
-            ),
+            ,
             modifier = Modifier.align(Bottom)
         )
         Column {
@@ -117,13 +115,11 @@ private fun CaloriesCounterView(totalCalories: Int) {
                 color = MaterialTheme.colors.onPrimary,
             )
             UnitDisplay(
-                data = UnitDisplayData(
                     amount = animatedCaloriesCount.value,
                     unit = stringResource(id = R.string.kcal),
                     amountColor = MaterialTheme.colors.onPrimary,
                     amountTextSize = 32.sp,
                     unitColor = MaterialTheme.colors.onPrimary,
-                )
             )
         }
     }
