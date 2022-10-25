@@ -10,7 +10,7 @@ import androidx.compose.ui.composed
  * @author Mahmoud Alim on 25/10/2022.
  */
 
-fun Modifier.clickableNoRippleC(onClick:() -> Unit) = composed {
+fun Modifier.clickableNoRipple(onClick:() -> Unit) = composed {
     this.clickable(
         interactionSource = remember { MutableInteractionSource() },
         indication = null,

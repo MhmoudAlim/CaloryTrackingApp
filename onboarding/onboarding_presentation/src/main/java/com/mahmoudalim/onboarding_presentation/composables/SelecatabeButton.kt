@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.core_ui.LocalSpacing
+import com.mahmoudalim.core_ui.bounceClick
 
 /**
  * @author Mahmoud Alim on 26/08/2022.
@@ -35,16 +36,17 @@ fun SelectableButton(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(RoundedCornerShape(100.dp))
+            .bounceClick()
+            .clickableNoRipple { onClick() }
+            .background(
+                color = if (isSelected) color else Color.Transparent,
+                shape = RoundedCornerShape(100.dp)
+            )
             .border(
                 width = 2.dp,
                 color = color,
                 shape = RoundedCornerShape(100.dp)
             )
-            .background(
-                color = if (isSelected) color else Color.Transparent,
-                shape = RoundedCornerShape(100.dp)
-            )
-            .clickable { onClick() }
             .padding(LocalSpacing.current.spaceMedium)
     ) {
         Text(

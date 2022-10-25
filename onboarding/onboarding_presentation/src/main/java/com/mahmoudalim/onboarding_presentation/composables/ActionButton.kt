@@ -28,7 +28,7 @@ fun ActionButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.bounceClick(),
+        modifier = modifier,
         enabled = iseEnabled,
         shape = RoundedCornerShape(60.dp),
         colors = buttonColors,
