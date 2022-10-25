@@ -2,7 +2,6 @@ package com.mahmoudalim.onboarding_presentation.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.core_ui.LocalSpacing
 import com.mahmoudalim.core_ui.bounceClick
+import com.mahmoudalim.core_ui.clickableNoRipple
 
 /**
  * @author Mahmoud Alim on 26/08/2022.

@@ -24,6 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
+import com.mahmoudalim.core.util.UiText
 import com.mahmoudalim.core_ui.LocalSpacing
 import com.mahmoudalim.core_ui.pressClickEffect
 import com.mahmoudalim.tracker_presentation.R
@@ -46,6 +47,7 @@ fun ExpandableMeal(
     Column(
         modifier = modifier
     ) {
+        MealHeaderTitle(meal.name)
         Row(modifier = Modifier
             .fillMaxWidth()
             .pressClickEffect()
@@ -53,32 +55,12 @@ fun ExpandableMeal(
             .padding(spacing.spaceMedium),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painterResource(id = meal.drawableRes),
-                contentDescription = meal.name.asString(context)
-            )
+            MealImage(meal.drawableRes, meal.name)
             Spacer(modifier = Modifier.width(spacing.spaceMedium))
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = meal.name.asString(context),
-                        style = MaterialTheme.typography.h3
-                    )
-                    Icon(
-                        imageVector = if (meal.isExpanded)
-                            Icons.Default.KeyboardArrowUp
-                        else Icons.Default.KeyboardArrowDown,
-                        contentDescription = if (meal.isExpanded)
-                            stringResource(id = R.string.collapse)
-                        else stringResource(id = R.string.extend)
-                    )
-
-                }
+                MealInfoExpandIcon(meal.isExpanded)
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -128,5 +110,55 @@ fun ExpandableMeal(
         AnimatedVisibility(visible = meal.isExpanded) {
             content()
         }
+    }
+}
+
+@Composable
+private fun MealInfoExpandIcon(isExpanded: Boolean) {
+    Row(
+        horizontalArrangement = Arrangement.End,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Icon(
+            imageVector = if (isExpanded)
+                Icons.Default.KeyboardArrowUp
+            else Icons.Default.KeyboardArrowDown,
+            contentDescription = if (isExpanded)
+                stringResource(id = R.string.collapse)
+            else stringResource(id = R.string.extend)
+        )
+    }
+}
+
+@Composable
+private fun MealImage(
+    mealDrawable: Int,
+    mealName: UiText
+) {
+    val context = LocalContext.current
+    Image(
+        painterResource(id = mealDrawable),
+        contentDescription = mealName.asString(context)
+    )
+}
+
+@Composable
+private fun MealHeaderTitle(
+    mealName: UiText,
+) {
+    val spacing = LocalSpacing.current
+    val context = LocalContext.current
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = spacing.spaceSmall),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = mealName.asString(context),
+            style = MaterialTheme.typography.h4,
+            color = MaterialTheme.colors.onBackground.copy(alpha = .6f)
+        )
     }
 }

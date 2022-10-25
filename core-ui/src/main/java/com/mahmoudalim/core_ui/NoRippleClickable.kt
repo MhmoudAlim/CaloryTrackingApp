@@ -1,4 +1,4 @@
-package com.mahmoudalim.onboarding_presentation.composables
+package com.mahmoudalim.core_ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
