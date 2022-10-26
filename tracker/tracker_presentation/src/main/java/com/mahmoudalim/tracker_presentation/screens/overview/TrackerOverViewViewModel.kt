@@ -20,8 +20,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias Tracker = TrackerOverViewState
-
 /**
  * @author Mahmoud Alim on 16/10/2022.
  */
