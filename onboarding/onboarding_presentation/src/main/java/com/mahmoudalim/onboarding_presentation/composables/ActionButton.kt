@@ -5,13 +5,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.core.R
 import com.mahmoudalim.core_ui.LocalSpacing
-import com.mahmoudalim.core_ui.bounceClick
 
 /**
  * Created by Mahmoud Alim on 05/02/2022.

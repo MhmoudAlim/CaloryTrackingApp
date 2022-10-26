@@ -7,9 +7,7 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
-import com.mahmoudalim.core_ui.BrightGreen
 import com.mahmoudalim.core_ui.DarkGray
-import com.mahmoudalim.core_ui.DarkGreen
 import com.mahmoudalim.core_ui.Dimensions
 import com.mahmoudalim.core_ui.LightGray
 import com.mahmoudalim.core_ui.LocalSpacing
@@ -43,11 +41,15 @@ private val LightColorPalette = lightColors(
     onSecondary = Color.White,
 )
 
+
 @Composable
 fun CaloryTrackingAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
+//    val systemUIController = rememberSystemUiController()
+//    systemUIController.setStatusBarColor(MaterialTheme.colors.primary)
+
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
