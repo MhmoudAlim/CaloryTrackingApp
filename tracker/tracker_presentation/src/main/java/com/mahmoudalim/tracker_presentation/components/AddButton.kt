@@ -42,14 +42,14 @@ fun AddButton(
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(80f))
+            .bounceClick()
             .clickable { onClick() }
             .border(
                 width = 1.dp,
                 color = color,
                 shape = RoundedCornerShape(80f)
             )
-            .padding(spacing.spaceMedium)
-            .bounceClick(),
+            .padding(spacing.spaceMedium),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {

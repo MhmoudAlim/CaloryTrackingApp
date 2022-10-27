@@ -1,4 +1,4 @@
-package com.mahmoudalim.tracker_presentation.screens.overview.model
+package com.mahmoudalim.tracker_presentation.screens.overview.state
 
 import com.mahmoudalim.tracker_domain.model.TrackedFood
 import java.time.LocalDate
@@ -6,7 +6,7 @@ import java.time.LocalDate
 /**
  * @author Mahmoud Alim on 16/10/2022.
  */
-data class TrackerOverViewState(
+data class OverViewState(
     val totalCarbs: Int = 0,
     val totalProtein: Int = 0,
     val totalFat: Int = 0,

@@ -1,4 +1,4 @@
-package com.mahmoudalim.tracker_presentation.screens.overview.composables
+package com.mahmoudalim.tracker_presentation.screens.overview.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D

@@ -1,4 +1,4 @@
-package com.mahmoudalim.tracker_presentation.screens.overview.composables
+package com.mahmoudalim.tracker_presentation.screens.overview.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

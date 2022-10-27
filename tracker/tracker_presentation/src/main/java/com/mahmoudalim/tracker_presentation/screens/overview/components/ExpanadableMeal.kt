@@ -1,4 +1,4 @@
-package com.mahmoudalim.tracker_presentation.screens.overview.composables
+package com.mahmoudalim.tracker_presentation.screens.overview.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -30,7 +30,7 @@ import com.mahmoudalim.core_ui.pressClickEffect
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.NutrientItemInfo
 import com.mahmoudalim.tracker_presentation.components.UnitDisplay
-import com.mahmoudalim.tracker_presentation.screens.overview.model.Meal
+import com.mahmoudalim.tracker_presentation.screens.overview.state.Meal
 
 /**
  * @author Mahmoud Alim on 24/10/2022.
@@ -107,9 +107,14 @@ fun ExpandableMeal(
             }
         }
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
-        AnimatedVisibility(visible = meal.isExpanded) {
+        AnimatedVisibility(
+            visible = meal.isExpanded,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
             content()
         }
+        if (meal.isExpanded) Spacer(modifier = Modifier.height(spacing.spaceMedium))
+
     }
 }
 

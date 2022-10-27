@@ -10,7 +10,7 @@ import com.mahmoudalim.core.domian.preferences.Preferences
 import com.mahmoudalim.core.navigation.Route
 import com.mahmoudalim.core.util.UiEvent
 import com.mahmoudalim.tracker_domain.usecase.TrackerUseCases
-import com.mahmoudalim.tracker_presentation.screens.overview.model.TrackerOverViewState
+import com.mahmoudalim.tracker_presentation.screens.overview.state.OverViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
@@ -24,7 +24,7 @@ import javax.inject.Inject
  * @author Mahmoud Alim on 16/10/2022.
  */
 @HiltViewModel
-class TrackerOverViewViewModel @Inject constructor(
+class OverViewViewModel @Inject constructor(
     private val preferences: Preferences,
     private val trackerUseCases: TrackerUseCases,
     private val savedStateHandle: SavedStateHandle
@@ -36,16 +36,16 @@ class TrackerOverViewViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    var state by mutableStateOf(TrackerOverViewState())
+    var state by mutableStateOf(OverViewState())
         private set
 
     init {
         preferences.saveShouldShowOnboarding(false)
     }
 
-    fun onEvent(event: TrackerOverViewEvent) {
+    fun onEvent(event: OverViewEvent) {
         when (event) {
-            is TrackerOverViewEvent.OnAddNewFoodClicked -> {
+            is OverViewEvent.OnAddNewFoodClicked -> {
                 viewModelScope.launch {
                     _uiEvent.send(
                         UiEvent.Navigate(
@@ -58,13 +58,13 @@ class TrackerOverViewViewModel @Inject constructor(
                     )
                 }
             }
-            is TrackerOverViewEvent.OnDeleteTrackedFood -> {
+            is OverViewEvent.OnDeleteTrackedFood -> {
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFoodUseCase(event.trackedFood)
                     refreshFoods()
                 }
             }
-            TrackerOverViewEvent.OnNextDayClick -> {
+            OverViewEvent.OnNextDayClick -> {
                 viewModelScope.launch {
                     state = state.copy(
                         date = state.date.plusDays(1)
@@ -72,7 +72,7 @@ class TrackerOverViewViewModel @Inject constructor(
                     refreshFoods()
                 }
             }
-            TrackerOverViewEvent.OnPreviousDayClick -> {
+            OverViewEvent.OnPreviousDayClick -> {
                 viewModelScope.launch {
                     state = state.copy(
                         date = state.date.minusDays(1)
@@ -81,7 +81,7 @@ class TrackerOverViewViewModel @Inject constructor(
                 }
 
             }
-            is TrackerOverViewEvent.OnToggleMealClick -> {
+            is OverViewEvent.OnToggleMealClick -> {
                 viewModelScope.launch {
                     state = state.copy(
                         meals = state.meals.map {

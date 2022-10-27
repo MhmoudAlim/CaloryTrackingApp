@@ -1,4 +1,4 @@
-package com.mahmoudalim.tracker_presentation.screens.overview.composables
+package com.mahmoudalim.tracker_presentation.screens.overview.components
 
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.foundation.background
@@ -26,7 +26,7 @@ import com.mahmoudalim.core_ui.LocalSpacing
 import com.mahmoudalim.core_ui.ProteinColor
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.UnitDisplay
-import com.mahmoudalim.tracker_presentation.screens.overview.model.TrackerOverViewState
+import com.mahmoudalim.tracker_presentation.screens.overview.state.OverViewState
 
 /**
  * @author Mahmoud Alim on 23/10/2022.
@@ -34,7 +34,7 @@ import com.mahmoudalim.tracker_presentation.screens.overview.model.TrackerOverVi
 
 @Composable
 fun NutrientsHeader(
-    state: TrackerOverViewState,
+    state: OverViewState,
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -63,7 +63,7 @@ fun NutrientsHeader(
 }
 
 @Composable
-private fun NutrientsArcBarInfoRow(state: TrackerOverViewState) {
+private fun NutrientsArcBarInfoRow(state: OverViewState) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
