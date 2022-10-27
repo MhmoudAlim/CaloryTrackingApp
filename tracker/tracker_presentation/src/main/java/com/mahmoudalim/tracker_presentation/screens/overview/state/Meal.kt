@@ -1,4 +1,4 @@
-package com.mahmoudalim.tracker_presentation.screens.overview.model
+package com.mahmoudalim.tracker_presentation.screens.overview.state
 
 import androidx.annotation.DrawableRes
 import com.mahmoudalim.core.util.UiText
