@@ -40,6 +40,7 @@ class OverViewViewModel @Inject constructor(
         private set
 
     init {
+        refreshFoods()
         preferences.saveShouldShowOnboarding(false)
     }
 
