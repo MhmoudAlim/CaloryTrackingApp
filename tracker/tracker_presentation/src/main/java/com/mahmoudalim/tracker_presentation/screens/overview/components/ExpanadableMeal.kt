@@ -2,7 +2,6 @@ package com.mahmoudalim.tracker_presentation.screens.overview.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.mahmoudalim.core.util.UiText
 import com.mahmoudalim.core_ui.LocalSpacing
+import com.mahmoudalim.core_ui.clickableNoRipple
 import com.mahmoudalim.core_ui.pressClickEffect
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.NutrientItemInfo
@@ -51,7 +51,7 @@ fun ExpandableMeal(
         Row(modifier = Modifier
             .fillMaxWidth()
             .pressClickEffect()
-            .clickable { onToggleClick() }
+            .clickableNoRipple { onToggleClick() }
             .padding(spacing.spaceMedium),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -70,8 +70,8 @@ fun ExpandableMeal(
                         unit = stringResource(id = R.string.kcal),
                         amount = meal.calories,
                         amountTextSize = 28.sp,
-                        unitColor = MaterialTheme.colors.onPrimary,
-                        amountColor = MaterialTheme.colors.onPrimary,
+                        unitColor = MaterialTheme.colors.onBackground,
+                        amountColor = MaterialTheme.colors.onBackground,
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -82,16 +82,16 @@ fun ExpandableMeal(
                             unit = stringResource(id = R.string.grams),
                             amount = meal.carbs,
                             amountTextSize = 28.sp,
-                            unitColor = MaterialTheme.colors.onPrimary,
-                            amountColor = MaterialTheme.colors.onPrimary,
+                            unitColor = MaterialTheme.colors.onBackground,
+                            amountColor = MaterialTheme.colors.onBackground,
                         )
                         NutrientItemInfo(
                             name = stringResource(id = R.string.protein),
                             unit = stringResource(id = R.string.grams),
                             amount = meal.protein,
                             amountTextSize = 28.sp,
-                            unitColor = MaterialTheme.colors.onPrimary,
-                            amountColor = MaterialTheme.colors.onPrimary,
+                            unitColor = MaterialTheme.colors.onBackground,
+                            amountColor = MaterialTheme.colors.onBackground,
 
                             )
                         NutrientItemInfo(
@@ -99,8 +99,8 @@ fun ExpandableMeal(
                             unit = stringResource(id = R.string.grams),
                             amount = meal.fat,
                             amountTextSize = 28.sp,
-                            unitColor = MaterialTheme.colors.onPrimary,
-                            amountColor = MaterialTheme.colors.onPrimary,
+                            unitColor = MaterialTheme.colors.onBackground,
+                            amountColor = MaterialTheme.colors.onBackground,
                         )
                     }
                 }
