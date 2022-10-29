@@ -45,7 +45,10 @@ fun NutrientsHeader(
             .background(MaterialTheme.colors.primary)
             .padding(horizontal = spacing.spaceLarge, vertical = spacing.spaceExtraLarge)
     ) {
-        CaloriesCounterView(state.totalCalories)
+        CaloriesCounterView(
+            caloriesGoal = state.caloriesGoal,
+            totalCalories = state.totalCalories
+        )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         NutrientsHorizontalBar(
             carbs = state.totalCarbs,
@@ -93,8 +96,9 @@ private fun NutrientsArcBarInfoRow(state: OverViewState) {
 }
 
 @Composable
-private fun CaloriesCounterView(totalCalories: Int) {
+private fun CaloriesCounterView(caloriesGoal: Int, totalCalories: Int) {
     val animatedCaloriesCount = animateIntAsState(targetValue = totalCalories)
+    val animatedCaloriesGoalCount = animateIntAsState(targetValue = caloriesGoal)
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -115,7 +119,7 @@ private fun CaloriesCounterView(totalCalories: Int) {
                 color = MaterialTheme.colors.onPrimary,
             )
             UnitDisplay(
-                    amount = animatedCaloriesCount.value,
+                    amount = animatedCaloriesGoalCount.value,
                     unit = stringResource(id = R.string.kcal),
                     amountColor = MaterialTheme.colors.onPrimary,
                     amountTextSize = 32.sp,

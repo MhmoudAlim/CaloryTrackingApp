@@ -31,7 +31,7 @@ fun NutrientsHorizontalBar(
 ) {
     val background = MaterialTheme.colors.background
     val caloryExceededColor = MaterialTheme.colors.error
-    val cornerRadiusValue = CornerRadius(80f)
+    val cornerRadiusValue = CornerRadius(40f)
     val carbWithRatio = remember { Animatable(0f) }
     val proteinWithRatio = remember { Animatable(0f) }
     val fatWithRatio = remember { Animatable(0f) }
