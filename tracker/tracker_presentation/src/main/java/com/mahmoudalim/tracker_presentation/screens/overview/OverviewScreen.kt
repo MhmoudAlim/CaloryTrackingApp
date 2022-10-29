@@ -60,6 +60,7 @@ fun OverViewScreen(
                     .padding(horizontal = spacing.spaceMedium)
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
+            Divider()
         }
         items(state.meals) { meal ->
             ExpandableMeal(

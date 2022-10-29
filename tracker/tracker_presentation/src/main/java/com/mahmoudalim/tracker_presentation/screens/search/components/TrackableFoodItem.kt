@@ -1,17 +1,21 @@
 package com.mahmoudalim.tracker_presentation.screens.search.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -29,9 +33,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,6 +55,7 @@ import com.mahmoudalim.tracker_presentation.screens.search.state.TrackableFoodUi
  */
 
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun TrackableFoodItem(
     trackableFoodUiState: TrackableFoodUiState,
@@ -59,26 +66,65 @@ fun TrackableFoodItem(
 ) {
     val spacing = LocalSpacing.current
     val food = trackableFoodUiState.food
+    val cornersRoundness = if (trackableFoodUiState.isExpanded) 0.dp else 12.dp
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .padding(spacing.spaceExtraSmall)
-            .shadow(
-                elevation = 1.dp,
-                shape = RoundedCornerShape(12.dp)
+            .clip(
+                RoundedCornerShape(
+                    topStart = 12.dp,
+                    topEnd = 12.dp,
+                    bottomStart = cornersRoundness,
+                    bottomEnd = cornersRoundness
+                )
             )
-            .background(MaterialTheme.colors.surface)
-            .clickable { onClick() }
-            .padding(end = spacing.spaceMedium)
+            .border(
+                width = 1.dp,
+                shape = RoundedCornerShape(
+                    topStart = 12.dp,
+                    topEnd = 12.dp,
+                    bottomStart = cornersRoundness,
+                    bottomEnd = cornersRoundness
+                ),
+                color = Color.LightGray
+            )
+            .background(
+                color = MaterialTheme.colors.surface,
+                shape = RoundedCornerShape(
+                    topStart = 12.dp,
+                    topEnd = 12.dp,
+                    bottomStart = cornersRoundness,
+                    bottomEnd = cornersRoundness
+                )
+            )
+            .fillMaxWidth()
+            .aspectRatio(21 / 9f)
+            .clickable { onClick() },
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        FoodItemImage(
-            name = food.name,
-            imageUrl = food.imageUrl
+        Image(
+            modifier = Modifier
+                .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = cornersRoundness))
+                .weight(.35f)
+                .fillMaxHeight(),
+            alignment = Alignment.Center,
+            painter = rememberImagePainter(
+                data = food.imageUrl,
+                builder = {
+                    crossfade(true)
+                    error(R.drawable.ic_dinner)
+                    fallback(R.drawable.ic_dinner)
+                }
+            ),
+            contentScale = ContentScale.Crop,
+            contentDescription = food.name,
         )
-        Spacer(modifier = Modifier.width(spacing.spaceMedium))
         Column(
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall)
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(spacing.spaceMedium)
+                .weight(.65f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             FoodItemNameAndMeta(
                 name = food.name,
@@ -90,13 +136,20 @@ fun TrackableFoodItem(
                 fatPer100gm = food.fatPer100gm
             )
         }
+
     }
+    if (trackableFoodUiState.isExpanded.not())
+        Spacer(modifier = Modifier.height(spacing.spaceMedium))
+
     FoodItemAmountAndCTA(
         amount = trackableFoodUiState.amount,
         isItemExpanded = trackableFoodUiState.isExpanded,
         onAmountChange = onAmountChange,
         onTrack = onTrack
     )
+
+    if (trackableFoodUiState.isExpanded)
+        Spacer(modifier = Modifier.height(spacing.spaceMedium))
 }
 
 
@@ -108,49 +161,73 @@ private fun FoodItemAmountAndCTA(
     onTrack: () -> Unit,
 ) {
     val spacing = LocalSpacing.current
+
     AnimatedVisibility(visible = isItemExpanded) {
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colors.surface),
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            BasicTextField(
-                value = amount,
-                onValueChange = onAmountChange,
-                singleLine = true,
-                keyboardActions = KeyboardActions(onDone = {
-                    onTrack()
-                    defaultKeyboardAction(ImeAction.Done)
-                }),
-                keyboardOptions = KeyboardOptions(
-                    imeAction = if (amount.isNotBlank())
-                        ImeAction.Done else ImeAction.Default,
-                    keyboardType = KeyboardType.Number,
-                ),
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(MaterialTheme.colors.primarySurface.copy(alpha = .1f))
-                    .padding(spacing.spaceMedium)
-                    .alignBy(LastBaseline)
-            )
-            Spacer(modifier = Modifier.width(spacing.spaceExtraSmall))
-            Text(
-                text = stringResource(id = R.string.grams),
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.alignBy(LastBaseline)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            IconButton(
-                onClick = onTrack,
-                enabled = amount.isNotBlank()
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = stringResource(id = R.string.track)
+                .clip(
+                    RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 0.dp,
+                        bottomStart = 12.dp,
+                        bottomEnd = 12.dp
+                    )
                 )
+                .background(
+                    color = Color.LightGray,
+                    shape = RoundedCornerShape(
+                        topStart = 0.dp,
+                        topEnd = 0.dp,
+                        bottomStart = 12.dp,
+                        bottomEnd = 12.dp
+                    )
+
+                )
+                .padding(spacing.spaceSmall)
+                .padding(horizontal = spacing.spaceSmall)
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                BasicTextField(
+                    value = amount,
+                    onValueChange = onAmountChange,
+                    singleLine = true,
+                    keyboardActions = KeyboardActions(onDone = {
+                        onTrack()
+                        defaultKeyboardAction(ImeAction.Done)
+                    }),
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = if (amount.isNotBlank())
+                            ImeAction.Done else ImeAction.Default,
+                        keyboardType = KeyboardType.Number,
+                    ),
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(20.dp))
+                        .background(MaterialTheme.colors.background)
+                        .padding(spacing.spaceMedium)
+                        .alignBy(LastBaseline)
+                )
+                Spacer(modifier = Modifier.width(spacing.spaceSmall))
+                Text(
+                    text = stringResource(id = R.string.grams),
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier.alignBy(LastBaseline)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(
+                    onClick = onTrack,
+                    enabled = amount.isNotBlank()
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Check,
+                        contentDescription = stringResource(id = R.string.track)
+                    )
+                }
             }
+
         }
     }
 }
@@ -205,13 +282,14 @@ private fun FoodItemNameAndMeta(
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.Start
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = name,
             style = MaterialTheme.typography.body1,
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            fontWeight = FontWeight.Normal
         )
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
         Text(
@@ -219,7 +297,9 @@ private fun FoodItemNameAndMeta(
                 id = R.string.kcal_per_100g,
                 caloriesPer100gm
             ),
-            style = MaterialTheme.typography.body2
+            style = MaterialTheme.typography.body2,
+            fontWeight = FontWeight.Light
+
         )
     }
 }
@@ -230,19 +310,5 @@ private fun FoodItemImage(
     name: String,
     imageUrl: String?
 ) {
-    Image(
-        painter = rememberImagePainter(
-            data = imageUrl,
-            builder = {
-                crossfade(true)
-                error(R.drawable.ic_dinner)
-                fallback(R.drawable.ic_dinner)
-            }
-        ),
-        contentScale = ContentScale.Crop,
-        contentDescription = name,
-        modifier = Modifier
-            .size(100.dp)
-            .clip(RoundedCornerShape(topStart = 12.dp, bottomStart = 20.dp))
-    )
+
 }
