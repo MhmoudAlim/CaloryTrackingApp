@@ -19,7 +19,7 @@ enum class DateFormat(val value: String) {
 fun LocalDate.formatDateText(format: DateFormat = DateFormat.DD_MMMM): String {
     val today = LocalDate.now()
     return when (this) {
-        today -> stringResource(id = R.string.yesterday)
+        today -> stringResource(id = R.string.today)
         today.minusDays(1) -> stringResource(id = R.string.yesterday)
         today.plusDays(1) -> stringResource(id = R.string.tomorrow)
         else -> DateTimeFormatter.ofPattern(format.value).format(this)
