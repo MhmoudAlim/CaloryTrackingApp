@@ -37,98 +37,65 @@ fun NutrientsArcBarInfo(
     name: String,
     color: Color,
     modifier: Modifier = Modifier,
-    strokeWidth: Dp = 10.dp,
-    nutrientUnit: String = stringResource(R.string.grams),
+    strokeWidth: Dp = 8.dp,
 ) {
-    val backgroundColor = MaterialTheme.colors.background
+    val background = MaterialTheme.colors.background
     val goalExceededColor = MaterialTheme.colors.error
-    val angelRatio = remember { Animatable(0f) }
-    LaunchedEffect(nutrientValue) {
-        angelRatio.animateTo(
-            targetValue = if (goal > 0) nutrientValue / goal.toFloat() else 0f,
-            animationSpec = tween(300)
+    val angleRatio = remember { Animatable(0f) }
+    LaunchedEffect(key1 = nutrientValue) {
+        angleRatio.animateTo(
+            targetValue = if (goal > 0) {
+                nutrientValue / goal.toFloat()
+            } else 0f,
+            animationSpec = tween(
+                durationMillis = 300
+            )
         )
     }
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        BarArc(
+    ArcChartView(
+        modifier = modifier,
+        nutrientValue = nutrientValue,
+        goal = goal,
+        background = background,
+        goalExceededColor = goalExceededColor,
+        strokeWidth = strokeWidth,
+        color = color,
+        angleRatio = angleRatio,
+    ) {
+        ArcInsideData(
             nutrientValue = nutrientValue,
             goal = goal,
             goalExceededColor = goalExceededColor,
-            backgroundColor = backgroundColor,
-            strokeWidth = strokeWidth,
-            angelRatio = angelRatio
-        )
-        BarTextValues(
-            nutrientValue = nutrientValue,
-            goal = goal,
-            goalExceededColor = goalExceededColor,
-            nutrientUnit = nutrientUnit,
-            backgroundColor = backgroundColor,
             name = name
         )
     }
 }
 
 @Composable
-private fun BarTextValues(
+private fun ArcChartView(
+    modifier: Modifier,
     nutrientValue: Int,
     goal: Int,
+    background: Color,
     goalExceededColor: Color,
-    nutrientUnit: String,
-    backgroundColor: Color,
-    name: String
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        val textColor =
-            if (nutrientValue > goal) goalExceededColor else MaterialTheme.colors.onPrimary
-        UnitDisplay(
-                unit = nutrientUnit,
-                amountColor = textColor,
-                amount = nutrientValue,
-                unitColor = backgroundColor,
-        )
-        Text(
-            text = name,
-            color = textColor,
-            style = MaterialTheme.typography.body1,
-            fontWeight = FontWeight.Medium
-        )
-    }
-}
-
-@Composable
-private fun BarArc(
-    nutrientValue: Int,
-    goal: Int,
-    goalExceededColor: Color,
-    backgroundColor: Color,
     strokeWidth: Dp,
-    angelRatio: Animatable<Float, AnimationVector1D>
+    color: Color,
+    angleRatio: Animatable<Float, AnimationVector1D>,
+    content: @Composable() () -> Unit,
 ) {
-    Canvas(
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1f)
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
     ) {
-        drawArc(
-            color = if (nutrientValue > goal) goalExceededColor else backgroundColor,
-            startAngle = 0f,
-            sweepAngle = 360f,
-            useCenter = false,
-            size = size,
-            style = Stroke(
-                width = strokeWidth.toPx(),
-                cap = StrokeCap.Round
-            )
-        )
-        if (nutrientValue > goal) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f),
+        ) {
             drawArc(
-                color = backgroundColor,
-                startAngle = 90f,
-                sweepAngle = 360f * angelRatio.value,
+                color = if (nutrientValue <= goal) background else goalExceededColor,
+                startAngle = 0f,
+                sweepAngle = 360f,
                 useCenter = false,
                 size = size,
                 style = Stroke(
@@ -136,6 +103,52 @@ private fun BarArc(
                     cap = StrokeCap.Round
                 )
             )
+            if (nutrientValue <= goal) {
+                drawArc(
+                    color = color,
+                    startAngle = 90f,
+                    sweepAngle = 360f * angleRatio.value,
+                    useCenter = false,
+                    size = size,
+                    style = Stroke(
+                        width = strokeWidth.toPx(),
+                        cap = StrokeCap.Round
+                    )
+                )
+            }
         }
+        content()
+    }
+}
+
+@Composable
+private fun ArcInsideData(
+    nutrientValue: Int,
+    goal: Int,
+    goalExceededColor: Color,
+    name: String
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        UnitDisplay(
+            amount = nutrientValue,
+            unit = stringResource(id = R.string.grams),
+            amountColor = if (nutrientValue <= goal) {
+                MaterialTheme.colors.onPrimary
+            } else goalExceededColor,
+            unitColor = if (nutrientValue <= goal) {
+                MaterialTheme.colors.onPrimary
+            } else goalExceededColor
+        )
+        Text(
+            text = name,
+            color = if (nutrientValue <= goal) {
+                MaterialTheme.colors.onPrimary
+            } else goalExceededColor,
+            style = MaterialTheme.typography.body1,
+            fontWeight = FontWeight.Light
+        )
     }
 }
