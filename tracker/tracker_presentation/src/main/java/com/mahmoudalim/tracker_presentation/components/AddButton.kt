@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.core_ui.LocalSpacing
 import com.mahmoudalim.core_ui.bounceClick
+import com.mahmoudalim.core_ui.clickableNoRipple
 import com.mahmoudalim.tracker_presentation.R
 
 /**
@@ -43,7 +44,7 @@ fun AddButton(
         modifier = modifier
             .clip(RoundedCornerShape(80f))
             .bounceClick()
-            .clickable { onClick() }
+            .clickableNoRipple { onClick() }
             .border(
                 width = 1.dp,
                 color = color,
