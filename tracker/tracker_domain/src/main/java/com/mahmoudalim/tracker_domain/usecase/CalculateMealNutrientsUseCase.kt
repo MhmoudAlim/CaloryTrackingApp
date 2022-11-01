@@ -1,5 +1,8 @@
 package com.mahmoudalim.tracker_domain.usecase
 
+import com.mahmoudalim.core.NutrientsFacts.CARBS_CALORY_PER_GRAM
+import com.mahmoudalim.core.NutrientsFacts.FAT_CALORY_PER_GRAM
+import com.mahmoudalim.core.NutrientsFacts.PROTEIN_CALORY_PER_GRAM
 import com.mahmoudalim.core.domian.model.ActivityLevel
 import com.mahmoudalim.core.domian.model.BmrFormula.*
 import com.mahmoudalim.core.domian.model.Gender
@@ -130,13 +133,5 @@ class CalculateMealNutrientsUseCase(private val preferences: Preferences) {
         val calories: Int,
         val mealType: MealType
     )
-
-
-    companion object {
-        private const val CARBS_CALORY_PER_GRAM = 4f
-        private const val PROTEIN_CALORY_PER_GRAM = 4f
-        private const val FAT_CALORY_PER_GRAM = 9f
-
-    }
 
 }

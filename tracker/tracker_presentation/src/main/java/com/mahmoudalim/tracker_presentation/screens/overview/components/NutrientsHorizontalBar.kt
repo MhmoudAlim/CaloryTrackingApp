@@ -9,6 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Size
+import com.mahmoudalim.core.NutrientsFacts.CARBS_CALORY_PER_GRAM
+import com.mahmoudalim.core.NutrientsFacts.FAT_CALORY_PER_GRAM
+import com.mahmoudalim.core.NutrientsFacts.PROTEIN_CALORY_PER_GRAM
 import com.mahmoudalim.core_ui.CarbColor
 import com.mahmoudalim.core_ui.FatColor
 import com.mahmoudalim.core_ui.ProteinColor
@@ -16,9 +19,6 @@ import com.mahmoudalim.core_ui.ProteinColor
 /**
  * @author Mahmoud Alim on 17/10/2022.
  */
-private const val CARBS_CALORY_PER_GRAM = 4f
-private const val PROTEIN_CALORY_PER_GRAM = 4f
-private const val FAT_CALORY_PER_GRAM = 9f
 
 @Composable
 fun NutrientsHorizontalBar(
