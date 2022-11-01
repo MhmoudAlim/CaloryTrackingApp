@@ -2,6 +2,7 @@ package com.mahmoudalim.tracker_presentation.screens.overview.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -51,7 +52,7 @@ fun ExpandableMeal(
         Row(modifier = Modifier
             .fillMaxWidth()
             .pressClickEffect()
-            .clickableNoRipple { onToggleClick() }
+            .clickable { onToggleClick() }
             .padding(spacing.spaceMedium),
             verticalAlignment = Alignment.CenterVertically
         ) {

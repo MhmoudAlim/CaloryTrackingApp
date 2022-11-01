@@ -1,6 +1,12 @@
 package com.mahmoudalim.tracker_presentation.screens.search.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,6 +42,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -162,7 +169,13 @@ private fun FoodItemAmountAndCTA(
 ) {
     val spacing = LocalSpacing.current
 
-    AnimatedVisibility(visible = isItemExpanded) {
+    AnimatedVisibility(
+        visible = isItemExpanded,
+        enter = slideInVertically() + expandVertically(
+            expandFrom = Alignment.Top
+        ) + fadeIn(initialAlpha = 0.3f),
+        exit = slideOutVertically() + shrinkVertically() + fadeOut()
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -302,13 +315,4 @@ private fun FoodItemNameAndMeta(
 
         )
     }
-}
-
-@OptIn(ExperimentalCoilApi::class)
-@Composable
-private fun FoodItemImage(
-    name: String,
-    imageUrl: String?
-) {
-
 }
