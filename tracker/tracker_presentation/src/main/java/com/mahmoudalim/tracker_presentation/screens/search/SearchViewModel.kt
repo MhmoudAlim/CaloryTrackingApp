@@ -77,9 +77,7 @@ class SearchViewModel @Inject constructor(
                 trackableFoods = emptyList()
             )
             useCases.searchForFoodUseCase(
-                query = state.query,
-                pageNumber = 1,
-                pageSize = 20
+                query = state.query
             ).apply {
                 onSuccess { foods ->
                     state = state.copy(

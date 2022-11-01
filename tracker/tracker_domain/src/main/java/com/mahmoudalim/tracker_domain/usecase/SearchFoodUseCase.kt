@@ -10,8 +10,8 @@ class SearchFoodUseCase(private val repo: TrackerRepo) {
 
     suspend operator fun invoke(
         query: String,
-        pageNumber: Int,
-        pageSize: Int
+        pageNumber: Int = 1,
+        pageSize: Int = 200
     ): Result<List<TrackableFood>> {
         if (query.isBlank()) return Result.success(emptyList())
 
