@@ -49,13 +49,7 @@ class OverViewViewModel @Inject constructor(
             is OverViewEvent.OnAddNewFoodClicked -> {
                 viewModelScope.launch {
                     _uiEvent.send(
-                        UiEvent.Navigate(
-                            route = Route.SEARCH
-                                    + "/${event.meal.mealType.name}"
-                                    + "/${state.date.dayOfMonth}"
-                                    + "/${state.date.monthValue}"
-                                    + "/${state.date.year}"
-                        )
+                        UiEvent.OnNextClick
                     )
                 }
             }

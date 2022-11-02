@@ -9,12 +9,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mahmoudalim.core.util.UiEvent
 import com.mahmoudalim.core_ui.LocalSpacing
 import com.mahmoudalim.tracker_presentation.R
 import com.mahmoudalim.tracker_presentation.components.AddButton
@@ -28,21 +26,12 @@ import com.mahmoudalim.tracker_presentation.screens.overview.components.Nutrient
 
 @Composable
 fun OverViewScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: OverViewViewModel = hiltViewModel()
+    viewModel: OverViewViewModel = hiltViewModel(),
+    onNextClick: (String, Int, Int, Int) -> Unit,
 ) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     val context = LocalContext.current
-    LaunchedEffect(key1 = context) {
-        viewModel.uiEvent.collect {
-            when (it) {
-                is UiEvent.Navigate -> onNavigate(it)
-                else -> Unit
-            }
-        }
-    }
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -74,8 +63,11 @@ fun OverViewScreen(
                     text = "${stringResource(id = R.string.add)} ${meal.name.asString(context)}",
                     modifier = Modifier.fillMaxWidth(.7f),
                     onClick = {
-                        viewModel.onEvent(
-                            OverViewEvent.OnAddNewFoodClicked(meal)
+                        onNextClick(
+                            meal.mealType.name,
+                            state.date.dayOfMonth,
+                            state.date.monthValue,
+                            state.date.year
                         )
                     }
                 )

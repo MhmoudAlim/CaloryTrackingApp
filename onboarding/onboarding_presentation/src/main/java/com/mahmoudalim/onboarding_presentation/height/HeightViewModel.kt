@@ -48,7 +48,7 @@ class HeightViewModel @Inject constructor(
             }
             preferences.saveHeight(heightNumber)
             _uiEvent.send(
-                UiEvent.Navigate(Route.WEIGHT)
+                UiEvent.OnNextClick
             )
         }
     }
