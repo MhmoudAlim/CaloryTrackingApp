@@ -5,7 +5,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -22,7 +21,7 @@ fun ActionButton(
     text: String = stringResource(id = R.string.next),
     iseEnabled: Boolean = true,
     textStyle: TextStyle = MaterialTheme.typography.button,
-    buttonColors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta),
+    buttonColors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondaryVariant),
     onClick: () -> Unit,
 ) {
     Button(
@@ -30,7 +29,7 @@ fun ActionButton(
         modifier = modifier,
         enabled = iseEnabled,
         shape = RoundedCornerShape(60.dp),
-        colors = buttonColors
+        colors = buttonColors,
     ) {
         Text(
             text = text,

@@ -11,7 +11,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mahmoudalim.core.domian.model.ActivityLevel
 import com.mahmoudalim.core.domian.model.GoalType
 import com.mahmoudalim.core.util.UiEvent
 import com.mahmoudalim.core_ui.LocalSpacing
@@ -20,7 +19,6 @@ import com.mahmoudalim.onboarding_presentation.composables.ActionButton
 import com.mahmoudalim.onboarding_presentation.composables.OnBoardingScreenScaffold
 import com.mahmoudalim.onboarding_presentation.composables.SelectableButton
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 /**
  * @author Mahmoud Alim on 27/08/2022.
@@ -28,12 +26,12 @@ import kotlinx.coroutines.flow.collect
 
 @Composable
 fun GoalScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: GoalViewModel = hiltViewModel()
+    viewModel: GoalViewModel = hiltViewModel(),
+    onNextClick: () -> Unit
 ) {
     ObserveUIEvents(
         uiEvent = viewModel.uiEvent,
-        onNavigate = onNavigate,
+        onNextClick = onNextClick,
     )
 
     OnBoardingScreenScaffold {
@@ -106,12 +104,12 @@ private fun ActivityLevelButtonsRow(viewModel: GoalViewModel) {
 @Composable
 private fun ObserveUIEvents(
     uiEvent: Flow<UiEvent>,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
 ) {
     LaunchedEffect(key1 = true) {
         uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.OnNextClick -> onNextClick()
                 else -> Unit
             }
         }

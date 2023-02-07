@@ -19,7 +19,6 @@ import com.mahmoudalim.onboarding_presentation.composables.ActionButton
 import com.mahmoudalim.onboarding_presentation.composables.OnBoardingScreenScaffold
 import com.mahmoudalim.onboarding_presentation.composables.UnitTextField
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 /**
  * @author Mahmoud Alim on 27/08/2022.
@@ -28,12 +27,12 @@ import kotlinx.coroutines.flow.collect
 @Composable
 fun HeightScreen(
     scaffoldState: ScaffoldState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
     viewModel: HeightViewModel = hiltViewModel(),
-) {
+    onNextClick: () -> Unit
+    ) {
     ObserveUIEvents(
         uiEvent = viewModel.uiEvent,
-        onNavigate = onNavigate,
+        onNextClick = onNextClick,
         scaffoldState = scaffoldState
     )
 
@@ -73,20 +72,22 @@ fun HeightScreen(
 @Composable
 private fun ObserveUIEvents(
     uiEvent: Flow<UiEvent>,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     scaffoldState: ScaffoldState,
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.OnNextClick -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message.asString(context)
                     )
                 }
                 UiEvent.NavigateUp -> Unit
+                UiEvent.Idle -> Unit
+
             }
         }
     }

@@ -19,7 +19,6 @@ import com.mahmoudalim.onboarding_presentation.composables.ActionButton
 import com.mahmoudalim.onboarding_presentation.composables.OnBoardingScreenScaffold
 import com.mahmoudalim.onboarding_presentation.composables.SelectableButton
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 /**
  * @author Mahmoud Alim on 27/08/2022.
@@ -27,12 +26,12 @@ import kotlinx.coroutines.flow.collect
 
 @Composable
 fun ActivityLevelScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: ActivityLevelViewModel = hiltViewModel()
+    viewModel: ActivityLevelViewModel = hiltViewModel(),
+    onNextClick: () -> Unit
 ) {
     ObserveUIEvents(
         uiEvent = viewModel.uiEvent,
-        onNavigate = onNavigate,
+        onNextClick = onNextClick,
     )
 
     OnBoardingScreenScaffold {
@@ -105,12 +104,12 @@ private fun ActivityLevelButtonsRow(viewModel: ActivityLevelViewModel) {
 @Composable
 private fun ObserveUIEvents(
     uiEvent: Flow<UiEvent>,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
 ) {
     LaunchedEffect(key1 = true) {
         uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.OnNextClick -> onNextClick()
                 else -> Unit
             }
         }

@@ -71,6 +71,7 @@ dependencies {
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
+    implementation(AndroidX.viewModelKtx)
 
     implementation(Coil.coilCompose)
 
@@ -80,6 +81,9 @@ dependencies {
     implementation(Retrofit.retrofit)
     implementation(Retrofit.okHttpLoggingInterceptor)
     implementation(Retrofit.moshiConverter)
+
+    debugImplementation(Chucker.debug)
+    releaseImplementation(Chucker.release)
 
     kapt(Room.roomCompiler)
     implementation(Room.roomKtx)

@@ -12,14 +12,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mahmoudalim.core.R
-import com.mahmoudalim.core.navigation.Route
 import com.mahmoudalim.core.util.UiEvent
 import com.mahmoudalim.core_ui.LocalSpacing
 import com.mahmoudalim.onboarding_presentation.composables.ActionButton
 import com.mahmoudalim.onboarding_presentation.composables.OnBoardingScreenScaffold
 import com.mahmoudalim.onboarding_presentation.composables.UnitTextField
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 /**
  * @author Mahmoud Alim on 24/08/2022.
@@ -29,11 +27,11 @@ import kotlinx.coroutines.flow.collect
 fun AgeScreen(
     viewModel: AgeViewModel = hiltViewModel(),
     scaffoldState: ScaffoldState,
-    onNavigate: (UiEvent.Navigate) -> Unit
+    onNextClick: () -> Unit
 ) {
     ObserveUIEvents(
         uiEvent = viewModel.uiEvent,
-        onNavigate = onNavigate,
+        onNextClick = onNextClick,
         scaffoldState = scaffoldState
     )
 
@@ -73,20 +71,21 @@ fun AgeScreen(
 @Composable
 private fun ObserveUIEvents(
     uiEvent: Flow<UiEvent>,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     scaffoldState: ScaffoldState,
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.OnNextClick -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = event.message.asString(context)
                     )
                 }
                 UiEvent.NavigateUp -> Unit
+                UiEvent.Idle -> Unit
             }
         }
     }

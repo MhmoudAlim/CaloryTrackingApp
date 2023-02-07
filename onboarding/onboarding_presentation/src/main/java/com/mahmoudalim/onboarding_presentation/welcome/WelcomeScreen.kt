@@ -23,7 +23,7 @@ import com.mahmoudalim.onboarding_presentation.composables.OnBoardingScreenScaff
 
 @Composable
 fun WelcomeScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit
+    onNextClick: () -> Unit
 ) {
     val spacing = LocalSpacing.current
 
@@ -47,7 +47,7 @@ fun WelcomeScreen(
         ActionButton(
             modifier = Modifier.align(BottomEnd)
         ) {
-            onNavigate(UiEvent.Navigate(Route.AGE))
+            onNextClick()
         }
     }
 }

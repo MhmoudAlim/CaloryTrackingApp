@@ -2,7 +2,6 @@ package com.mahmoudalim.onboarding_presentation.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.mahmoudalim.core_ui.LocalSpacing
+import com.mahmoudalim.core_ui.bounceClick
+import com.mahmoudalim.core_ui.clickableNoRipple
 
 /**
  * @author Mahmoud Alim on 26/08/2022.
@@ -35,16 +36,17 @@ fun SelectableButton(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(RoundedCornerShape(100.dp))
+            .bounceClick()
+            .clickableNoRipple { onClick() }
+            .background(
+                color = if (isSelected) color else Color.Transparent,
+                shape = RoundedCornerShape(100.dp)
+            )
             .border(
                 width = 2.dp,
                 color = color,
                 shape = RoundedCornerShape(100.dp)
             )
-            .background(
-                color = if (isSelected) color else Color.Transparent,
-                shape = RoundedCornerShape(100.dp)
-            )
-            .clickable { onClick() }
             .padding(LocalSpacing.current.spaceMedium)
     ) {
         Text(
